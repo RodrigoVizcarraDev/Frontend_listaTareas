@@ -8,11 +8,13 @@ const FormularioTarea = () => {
 
     const [tarea, setTarea] = useState("");
     const [tareas, setTareas] = useState(tareaLocalStorage);
-    
+
     // CICLO DE VIDA
     useEffect(()=>{
         localStorage.setItem("listaTareas", JSON.stringify(tareas));
     }, [tareas]);
+
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         setTareas([...tareas, { id: Date.now(), text: tarea }]);

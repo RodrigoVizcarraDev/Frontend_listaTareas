@@ -3,6 +3,7 @@ import ListaTareas from "./ListaTareas";
 import { useState, useEffect } from "react";
 import {useForm} from "react-hook-form";
 import Swal from "sweetalert2";
+import { crearTarea, obtenerListaTareas } from "../helpers/queries";
 
 const FormularioTarea = () => {
     //traemos las tareas del localStorage
@@ -16,19 +17,43 @@ const FormularioTarea = () => {
 
     // CICLO DE VIDA
     useEffect(()=>{
-        localStorage.setItem("listaTareas", JSON.stringify(tareas));
-    }, [tareas]);
+        obtenerListaTareas().then((respuesta) => {
+            if(respuesta){
+                setTareas(respuesta)
+                console.log(respuesta);
+            }else{
+                Swal.fire(
+                    "Error",
+                    "Intente realizar la operacion en unos minutos",
+                    "error"
+                )
+            }
+        })
+    }, []);
 
 
     const onSubmit = (tarea) => {
+
+        crearTarea(tarea).then((respuesta) => {
+            console.log(respuesta.status)
+            if(respuesta.status === 200){
+                Swal.fire(
+                    "Tarea creada",
+                    `La tarea ${tarea.nombreTarea} fue creada`,
+                    "success"
+                );
+                reset();
+            }else{
+                Swal.fire(
+                    "Error al crear la tarea",
+                    `La tarea ${tarea.nombreTarea} no pudo ser creada`,
+                    "error"
+                );
+            }
+        })
         console.log(tarea);
-        setTareas([...tareas, { id: Date.now(), text: tarea.nombreTarea }]);
+        
         reset();
-        Swal.fire(
-            "Listo",
-            "Tarea creada correctamente",
-            "success"
-        )
     };
 
     function borrarTarea(nombreTarea){

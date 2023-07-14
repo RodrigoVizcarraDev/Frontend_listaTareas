@@ -60,7 +60,7 @@ const FormularioTarea = () => {
                         })}
                     />
                     <Button variant="primary" type="submit">
-                        Submit
+                        Guardar
                     </Button>
                 </Form.Group>
                 <FormText className="text-danger">

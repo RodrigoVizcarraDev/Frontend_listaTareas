@@ -2,7 +2,7 @@ import { Button, ListGroup, Modal, Form } from "react-bootstrap";
 import { useState } from "react";
 import { set } from "react-hook-form";
 
-const ItemTarea = ({ textoTarea, borrarTarea }) => {
+const ItemTarea = ({ tarea, borrarTarea }) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => {
@@ -16,13 +16,13 @@ const ItemTarea = ({ textoTarea, borrarTarea }) => {
     return (
         <>
             <ListGroup.Item className="my-2 bg-secondary text-white fs-3">
-                {textoTarea}
+                {tarea.nombreTarea}
             </ListGroup.Item>
             <div style={{ margin: "0 auto" }}>
                 <Button
                     className="mx-auto"
                     style={{ width: "200px" }}
-                    onClick={() => borrarTarea(textoTarea)}
+                    onClick={() => borrarTarea(tarea._id)}
                 >
                     Eliminar tarea
                 </Button>

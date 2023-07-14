@@ -4,7 +4,7 @@ import ItemTarea from "./ItemTarea";
 const ListaTareas = ({listaTareas, borrarTarea}) => {
     return (
         <ListGroup>
-            {listaTareas.map((tarea, posicion) => <ItemTarea key={posicion} textoTarea={tarea.nombreTarea} borrarTarea={borrarTarea}></ItemTarea> )}
+            {listaTareas.map((tarea, posicion) => <ItemTarea key={posicion} tarea={tarea} borrarTarea={borrarTarea}></ItemTarea> )}
         </ListGroup>
     );
 };

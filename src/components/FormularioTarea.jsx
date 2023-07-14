@@ -6,9 +6,6 @@ import Swal from "sweetalert2";
 import { crearTarea, eliminarTarea, obtenerListaTareas } from "../helpers/queries";
 
 const FormularioTarea = () => {
-    //traemos las tareas del localStorage
-    const tareaLocalStorage =
-        JSON.parse(localStorage.getItem("listaTareas")) || [];
 
     // react hook form
     const {
@@ -16,16 +13,16 @@ const FormularioTarea = () => {
         handleSubmit,
         formState: { errors },
         reset,
+        setValue,
     } = useForm();
 
-    const [tareas, setTareas] = useState(tareaLocalStorage);
+    const [tareas, setTareas] = useState([]);
 
     // CICLO DE VIDA
     useEffect(() => {
         obtenerListaTareas().then((respuesta) => {
             if (respuesta) {
                 setTareas(respuesta);
-                console.log(respuesta);
             } else {
                 Swal.fire(
                     "Error",
@@ -39,7 +36,12 @@ const FormularioTarea = () => {
     const onSubmit = (tarea) => {
         crearTarea(tarea).then((respuesta) => {
             console.log(respuesta.status);
-            if (respuesta.status === 200) {
+            if (respuesta.status === 201) {
+
+                obtenerListaTareas().then((respuesta) => {
+                    setTareas(respuesta)
+                })
+
                 Swal.fire(
                     "Tarea creada",
                     `La tarea ${tarea.nombreTarea} fue creada`,
@@ -54,8 +56,6 @@ const FormularioTarea = () => {
                 );
             }
         });
-        console.log(tarea);
-
         reset();
     };
 
@@ -79,16 +79,25 @@ const FormularioTarea = () => {
                     if(respuesta.status === 200){
                         obtenerListaTareas().then((respuesta) => {
                             if(respuesta){
-                                console.log("PRUEBA ANTES DE ACTUALIZAR LISTA TAREAS")
                                 setTareas(respuesta)
+                                
                             }
                         })
+
+                        Swal.fire(
+                            "Tarea eliminada",
+                            "La tarea elimina correctamente",
+                            "success"
+                        );
+
                     }else{
+
                         Swal.fire(
                             "No se pudo borrar la tarea",
                             "Error al intentar borrar intentelo más tarde",
                             "error"
                         );
+
                     }
                 })
             }

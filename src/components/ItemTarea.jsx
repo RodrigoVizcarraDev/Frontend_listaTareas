@@ -1,6 +1,5 @@
 import { Button, ListGroup, Modal, Form } from "react-bootstrap";
 import { useState } from "react";
-import { set } from "react-hook-form";
 
 const ItemTarea = ({ tarea, borrarTarea }) => {
     const [show, setShow] = useState(false);

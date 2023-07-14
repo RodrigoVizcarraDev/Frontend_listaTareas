@@ -140,6 +140,7 @@ const FormularioTarea = () => {
             <ListaTareas
                 listaTareas={tareas}
                 borrarTarea={borrarTarea}
+                setTareas={setTareas}
             ></ListaTareas>
         </>
     );

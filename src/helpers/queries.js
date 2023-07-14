@@ -42,3 +42,18 @@ export const eliminarTarea = async (idTarea) => {
         console.log(error);
     }
 };
+
+export const editarTarea = async (tarea,idTarea) => {
+    try {
+        const respuesta = await fetch(URL_TAREA+"/"+idTarea, {
+            method: "PUT",
+            headers: {
+                "Content-type":"application/json"
+            },
+            body: JSON.stringify(tarea)
+        })
+        return respuesta;
+    } catch (error) {
+        console.log(error);
+    }
+}

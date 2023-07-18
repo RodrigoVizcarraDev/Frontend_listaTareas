@@ -35,7 +35,6 @@ const FormularioTarea = () => {
 
     const onSubmit = (tarea) => {
         crearTarea(tarea).then((respuesta) => {
-            console.log(respuesta.status);
             if (respuesta.status === 201) {
 
                 obtenerListaTareas().then((respuesta) => {

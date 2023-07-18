@@ -15,8 +15,7 @@ const ItemTarea = ({ tarea, borrarTarea, setTareas }) => {
     } = useForm();
 
     const onSubmit = (tareaSubmit) => {
-        // console.log(tarea) imprime {nombreTarea: "tarea"}
-        //console.log(tarea);
+        
         editarTarea(tareaSubmit, tarea._id).then((respuesta) => {
             if(respuesta.status === 200){
 

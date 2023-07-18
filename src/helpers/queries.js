@@ -4,7 +4,6 @@ const URL_TAREA = import.meta.env.VITE_API_TAREA;
 
 export const crearTarea = async (tarea) => {
     try {
-        console.log(tarea);
         const respuesta = await fetch(URL_TAREA, {
             method: "POST",
             headers: {
